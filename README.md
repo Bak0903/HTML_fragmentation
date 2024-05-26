@@ -30,3 +30,4 @@ pip install -r requirements.txt
 Run the main script:
 
 python msg_split.py --max-len=4096 --source=./source.html
+
