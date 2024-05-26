@@ -6,24 +6,26 @@ from typing import Generator
 
 load_dotenv()
 
-BLOCKED_TAGS = ['<p', '<b', '<strong', '<i', '<ul', '<ol', '<div', '<span', ]
+BLOCKED_TAGS = os.getenv('HTML_TAGS', '').split(',')
 MAX_LEN = os.getenv('MAX_LEN')
 
 
-def split_message(source: str, max_len: int = MAX_LEN)-> Generator[str, None, None]:
-    """Splits the original message (`source`) into fragments of the specified length 
-        (`max_len`)."""
+def split_message(
+        source: str, max_len: int = MAX_LEN
+) -> Generator[str, None, None]:
+    """
+    Splits the original message (`source`) into fragments of the specified
+    length (`max_len`).
+    """
+
     source_len = len(source)
 
     start = 0
     end = max_len
-    current_chunk = ''
     opening_tags = ''
     closing_tags = ''
     unclosed_tags = []
 
-    splited_messages = []
-    
     chunk = source[start:end]
     while start < source_len:
         tags = get_all_tags(chunk)
@@ -38,7 +40,6 @@ def split_message(source: str, max_len: int = MAX_LEN)-> Generator[str, None, No
                 chunk = chunk[:-len(closing_tags)]
                 chunk += closing_tags
             else:
-                # splited_messages.append(chunk)
                 yield chunk
                 start = end
                 end += max_len - len(opening_tags)
@@ -54,8 +55,11 @@ def split_message(source: str, max_len: int = MAX_LEN)-> Generator[str, None, No
 
 
 def check_is_split_here(tags: list) -> bool:
-    """Determines if the current tag is a suitable split point based on 
-        the given list of tags"""
+    """
+    Determines if the current tag is a suitable split point based on the given
+    list of tags
+    """
+
     if not tags:
         return True
     tag = tags[-1][0]
@@ -67,8 +71,8 @@ def check_is_split_here(tags: list) -> bool:
 
 
 def find_unclosed_tag(tags: list) -> list:
-    '''Finds unclosed tags by checking the 
-        given list of tags.'''
+    """ Finds unclosed tags by checking the given list of tags. """
+
     opening_tags = []
     closing_tags = []
     for tag, pos in tags:
@@ -84,9 +88,9 @@ def find_unclosed_tag(tags: list) -> list:
 
 
 def get_all_tags(chunk: str) -> list:
-    '''Finds all tags in the given string.'''
+    """ Finds all tags in the given string."""
     tag_pattern = re.compile(r'</?[A-Za-z0-9]+')
-    tags = [ (m.group(), m.start()) for m in tag_pattern.finditer(chunk)]
+    tags = [(m.group(), m.start()) for m in tag_pattern.finditer(chunk)]
     return tags
 
 

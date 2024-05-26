@@ -2,13 +2,14 @@ version: "3.8"
 
 services:
   backend:
+    container_name: msg_split
     restart: always
     build:
       context: .
       dockerfile: backend/Dockerfile
       args:
         FOR_DEVELOPMENT: 'true'
-    command: bash -c "python msg_split.py --max-len=4096 --source=./source.html"
+    command: bash -c "python msg_split.py --source=./source.html"
     ports:
       - "8080:8000"
     env_file:

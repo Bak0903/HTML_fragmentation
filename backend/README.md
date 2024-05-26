@@ -1,33 +1,36 @@
 # HTML_fragmentation
 
+**[HTML_fragmentation](https://github.com/Bak0903/HTML_fragmentation)**
 
 This project contains the main script msg_split.py along with other necessary files such as .gitignore, requirements.txt, source.html for testing, and test.py.
 
+## Stack
 
-Contents
+- Python 3.10
 
-msg_split.py: This is the main script of the project. It is responsible for splitting messages into smaller chunks.
+## Local Development
 
-.gitignore: This file specifies intentionally untracked files that Git should ignore.
+In order to deploy the project for local development, one should:
+ 1. clone from the remote repository 
+ 2. copy default envs (and change them if there is a need)
+ 3. execute docker-compose command (make sure that you have docker and docker-compose installed on your machine)
+```
+cd {project_folder}
+cp .env.sample .env
+docker-compose up
+```
 
-requirements.txt: This file lists all the Python libraries that the project depends on. It can be used to install dependencies using pip install -r requirements.txt.
+## How to run tests
 
-source.html: This HTML file is used for testing purposes.
+```
+docker-compose -f docker-compose-test.yml up --build
+```
 
-test.py: This Python script contains test cases for the msg_split.py script.
+## Variables
 
+| Key          | Description                | Default value                       |
+|:-------------|:---------------------------|:------------------------------------|
+| MAX_LEN      | Maximum length             | 4096                                |
+| BLOCKED_TAGS | Source tags                | <p,<b,<strong,<i,<ul,<ol,<div,<span |
 
-Usage
-
-Clone the repository:
-
-git clone https://github.com/Bak0903/HTML_fragmentation.git
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Run the main script:
-
-python msg_split.py --max-len=4096 --source=./source.html
 
