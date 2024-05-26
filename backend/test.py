@@ -1,5 +1,5 @@
 import unittest
-from msg_split import split_message, check_is_split_here, find_unclosed_tag, get_all_tags
+from backend.msg_split import split_message, check_is_split_here, find_unclosed_tag, get_all_tags
 
 
 class TestMyProgram(unittest.TestCase):

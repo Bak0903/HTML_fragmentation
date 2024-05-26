@@ -1,9 +1,13 @@
 import re
+import os
 import click
+from dotenv import load_dotenv
 from typing import Generator
 
+load_dotenv()
+
 BLOCKED_TAGS = ['<p', '<b', '<strong', '<i', '<ul', '<ol', '<div', '<span', ]
-MAX_LEN = 4096
+MAX_LEN = os.getenv('MAX_LEN')
 
 
 def split_message(source: str, max_len: int = MAX_LEN)-> Generator[str, None, None]:
