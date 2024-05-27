@@ -4,30 +4,40 @@
 This project contains the main script msg_split.py along with other necessary files such as .gitignore, requirements.txt, source.html for testing, and test.py.
 
 
-Contents
+## Stack
 
-msg_split.py: This is the main script of the project. It is responsible for splitting messages into smaller chunks.
+- Python 3.10
 
-.gitignore: This file specifies intentionally untracked files that Git should ignore.
+## Local Development
 
-requirements.txt: This file lists all the Python libraries that the project depends on. It can be used to install dependencies using pip install -r requirements.txt.
-
-source.html: This HTML file is used for testing purposes.
-
-test.py: This Python script contains test cases for the msg_split.py script.
-
-
-Usage
-
-Clone the repository:
-
+In order to deploy the project for local development, one should:
+ 1. Clone from the remote repository:
+```
 git clone https://github.com/Bak0903/HTML_fragmentation.git
-
-Install dependencies:
-
+cd HTML_fragmentation
+```
+ 2. Create a virtual environment:
+```
+python3 -m venv venv
+```
+ 3. Activate the virtual environment:
+```
+source venv/bin/activate
+```
+ 4. Install dependencies:
+```
 pip install -r requirements.txt
+```
+ 5. Run the main script:
+```
+python script/msg_split.py --max-len=4096 --source=./template/source.html
+```
 
-Run the main script:
 
-python msg_split.py --max-len=4096 --source=./source.html
+## How to run tests
+
+```
+python -m unittest test/test_msg_split.py
+```
+
 
