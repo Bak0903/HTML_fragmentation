@@ -1,5 +1,5 @@
 import unittest
-from msg_split import split_message, check_is_split_here, find_unclosed_tag, get_all_tags
+from script.msg_split import split_message, check_is_split_here, find_unclosed_tag, get_all_tags
 
 
 class TestMyProgram(unittest.TestCase):
@@ -58,7 +58,3 @@ class TestMyProgram(unittest.TestCase):
         tags = get_all_tags(chunk)
         expected_tags = [('<html', 0), ('<body', 6), ('<p', 12), ('</p', 30), ('<p', 34)]
         self.assertEqual(tags, expected_tags)
-
-
-if __name__ == '__main__':
-    unittest.main()
